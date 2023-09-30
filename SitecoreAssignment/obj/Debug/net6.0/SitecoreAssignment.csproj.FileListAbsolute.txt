@@ -1,0 +1,15 @@
+C:\Users\Amirr\Documents\Projects\SitecoreAssignment\SitecoreAssignment\bin\Debug\net6.0\SitecoreAssignment.exe
+C:\Users\Amirr\Documents\Projects\SitecoreAssignment\SitecoreAssignment\bin\Debug\net6.0\SitecoreAssignment.deps.json
+C:\Users\Amirr\Documents\Projects\SitecoreAssignment\SitecoreAssignment\bin\Debug\net6.0\SitecoreAssignment.runtimeconfig.json
+C:\Users\Amirr\Documents\Projects\SitecoreAssignment\SitecoreAssignment\bin\Debug\net6.0\SitecoreAssignment.dll
+C:\Users\Amirr\Documents\Projects\SitecoreAssignment\SitecoreAssignment\bin\Debug\net6.0\SitecoreAssignment.pdb
+C:\Users\Amirr\Documents\Projects\SitecoreAssignment\SitecoreAssignment\obj\Debug\net6.0\SitecoreAssignment.csproj.AssemblyReference.cache
+C:\Users\Amirr\Documents\Projects\SitecoreAssignment\SitecoreAssignment\obj\Debug\net6.0\SitecoreAssignment.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Amirr\Documents\Projects\SitecoreAssignment\SitecoreAssignment\obj\Debug\net6.0\SitecoreAssignment.AssemblyInfoInputs.cache
+C:\Users\Amirr\Documents\Projects\SitecoreAssignment\SitecoreAssignment\obj\Debug\net6.0\SitecoreAssignment.AssemblyInfo.cs
+C:\Users\Amirr\Documents\Projects\SitecoreAssignment\SitecoreAssignment\obj\Debug\net6.0\SitecoreAssignment.csproj.CoreCompileInputs.cache
+C:\Users\Amirr\Documents\Projects\SitecoreAssignment\SitecoreAssignment\obj\Debug\net6.0\SitecoreAssignment.dll
+C:\Users\Amirr\Documents\Projects\SitecoreAssignment\SitecoreAssignment\obj\Debug\net6.0\refint\SitecoreAssignment.dll
+C:\Users\Amirr\Documents\Projects\SitecoreAssignment\SitecoreAssignment\obj\Debug\net6.0\SitecoreAssignment.pdb
+C:\Users\Amirr\Documents\Projects\SitecoreAssignment\SitecoreAssignment\obj\Debug\net6.0\SitecoreAssignment.genruntimeconfig.cache
+C:\Users\Amirr\Documents\Projects\SitecoreAssignment\SitecoreAssignment\obj\Debug\net6.0\ref\SitecoreAssignment.dll

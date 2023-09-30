@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "SitecoreAssignment/1.0.0": {
+        "runtime": {
+          "SitecoreAssignment.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "SitecoreAssignment/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
