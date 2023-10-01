@@ -8,14 +8,14 @@ using System.Collections.Generic;
 
 // QItem for current location and distance
 // from source location
-public class QItem {
+public class Node {
     public int row;
     public int col;
     public int dist;
-    public QItem prev;
+    public Node prev;
    
 
-    public QItem(int x, int y, int w, QItem prev) {
+    public Node(int x, int y, int w, Node prev) {
         this.row = x;
         this.col = y;
         this.dist = w;
@@ -26,7 +26,7 @@ public class QItem {
 
 public static class GFG {
 
-    static List<QItem> tatoshkaStartPoints = new List<QItem>();
+    static List<Node> tatoshkaStartPoints = new List<Node>();
 
     public static int minDistance(char[,] grid) {
         int N = grid.GetLength(0);
@@ -35,7 +35,7 @@ public static class GFG {
         //directional vectors that also includes diagonal directions
         int[] dRow = { -1, 0, 1, 0, -1, 1, 1, -1 };
         int[] dCol = { 0, 1, 0, -1, 1, 1, -1, -1 };
-        QItem source = new QItem(0, 0, 0, null);
+        Node source = new Node(0, 0, 0, null);
 
         // To keep track of visited QItems. Marking
         // blocked cells as visited.
@@ -66,7 +66,7 @@ public static class GFG {
             if (isValid(visited, tatoshkaPosRow, tatoshkaPosCol, N, M)) {
                 adjacency++;
                 Console.WriteLine("Tatoshka: ({0},{1})", tatoshkaPosRow, tatoshkaPosCol);
-                tatoshkaStartPoints.Add(new QItem(tatoshkaPosRow, tatoshkaPosCol, 0, null));
+                tatoshkaStartPoints.Add(new Node(tatoshkaPosRow, tatoshkaPosCol, 0, null));
             }
             
         }
@@ -74,12 +74,12 @@ public static class GFG {
         if (adjacency == 1) Console.WriteLine("No starting position for Tatoshka");
 
         // applying BFS on matrix cells starting from source
-        Queue<QItem> q = new Queue<QItem>();
+        Queue<Node> q = new Queue<Node>();
         q.Enqueue(source);
         visited[source.row, source.col] = true;
 
-        QItem dest = null;
-        QItem p = null;
+        Node dest = null;
+        Node p = null;
 
         while (q.Count > 0) {
             p = q.Peek();
@@ -96,7 +96,7 @@ public static class GFG {
                 int adjy = p.col + dCol[i];
 
                 if (isValid(visited, adjx, adjy, N, M)) {
-                    q.Enqueue(new QItem(adjx, adjy, p.dist + 1, p));
+                    q.Enqueue(new Node(adjx, adjy, p.dist + 1, p));
                     visited[adjx, adjy] = true;
                 }
             }
@@ -116,7 +116,7 @@ public static class GFG {
         }
     }
 
-    public static void printPath(QItem dest) {
+    public static void printPath(Node dest) {
         if (dest == null) return;
 
         // print list of head node
