@@ -26,10 +26,13 @@ public class QItem {
 
 public static class GFG {
 
+    static List<QItem> tatoshkaStartPoints = new List<QItem>();
 
     public static int minDistance(char[,] grid) {
         int N = grid.GetLength(0);
         int M = grid.GetLength(1);
+
+        //directional vectors that also includes diagonal directions
         int[] dRow = { -1, 0, 1, 0, -1, 1, 1, -1 };
         int[] dCol = { 0, 1, 0, -1, 1, 1, -1, -1 };
         QItem source = new QItem(0, 0, 0, null);
@@ -55,6 +58,20 @@ public static class GFG {
                 }
             }
         }
+        int adjacency = 0;
+        //check starting position for Tatoshka
+        for (int i = 0; i < 8; i++) {
+            int tatoshkaPosRow = source.row + dRow[i];
+            int tatoshkaPosCol = source.col + dCol[i];
+            if (isValid(visited, tatoshkaPosRow, tatoshkaPosCol, N, M)) {
+                adjacency++;
+                Console.WriteLine("Tatoshka: ({0},{1})", tatoshkaPosRow, tatoshkaPosCol);
+                tatoshkaStartPoints.Add(new QItem(tatoshkaPosRow, tatoshkaPosCol, 0, null));
+            }
+            
+        }
+
+        if (adjacency == 1) Console.WriteLine("No starting position for Tatoshka");
 
         // applying BFS on matrix cells starting from source
         Queue<QItem> q = new Queue<QItem>();
@@ -94,6 +111,7 @@ public static class GFG {
             p = dest;
             //use recursion to print in reverse
             printPath(p);
+           
             return dest.dist;
         }
     }
@@ -105,6 +123,7 @@ public static class GFG {
         printPath(dest.prev);
 
         // After everything else is printed
+        
         Console.WriteLine("({0},{1}),", dest.row, dest.col);
     }
 
