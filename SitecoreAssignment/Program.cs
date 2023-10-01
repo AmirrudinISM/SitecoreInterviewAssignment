@@ -50,5 +50,5 @@ char[,] grid = {    {'*','s','0','0','*' },
                     {'0','*','0','*','0' },
                     {'*','0','d','*','*' },};
 **/ 
-Console.WriteLine(GFG.minDistance(grid, 10, 10));
+Console.WriteLine(GFG.minDistance(grid));
 

@@ -2,7 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 
-//Algorithm obtained from Aarthi Rathi https://www.geeksforgeeks.org/shortest-distance-two-cells-matrix-grid/
+//References: (1) Aarthi Rathi https://www.geeksforgeeks.org/shortest-distance-two-cells-matrix-grid/
+//            (2) 29AjayKumar https://www.geeksforgeeks.org/breadth-first-traversal-bfs-on-a-2d-array/
+
 
 // QItem for current location and distance
 // from source location
@@ -25,14 +27,18 @@ public class QItem {
 public static class GFG {
 
 
-    public static int minDistance(char[,] grid, int N, int M) {
+    public static int minDistance(char[,] grid) {
+        int N = grid.GetLength(0);
+        int M = grid.GetLength(1);
+        int[] dRow = { -1, 0, 1, 0, -1, 1, 1, -1 };
+        int[] dCol = { 0, 1, 0, -1, 1, 1, -1, -1 };
         QItem source = new QItem(0, 0, 0, null);
 
         // To keep track of visited QItems. Marking
         // blocked cells as visited.
         bool[,] visited = new bool[N, M];
 
- 
+
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < M; j++) {
                 if (grid[i, j] == '0') {
@@ -46,128 +52,40 @@ public static class GFG {
                 if (grid[i, j] == 's') {
                     source.row = i;
                     source.col = j;
-                    
                 }
             }
         }
-
-        int adjacency = 0;
-
-        if (source.row - 1 >= 0 && visited[source.row - 1, source.col] == false) {
-            Console.Write("Totoshka ({0},{1}),", source.row - 1, source.col);
-            adjacency++;
-        }
-
-        // moving down
-        if (source.row + 1 < N && visited[source.row + 1, source.col] == false) {
-            Console.Write("Totoshka ({0},{1}),", source.row + 1, source.col);
-            adjacency++;
-        }
-
-        //left
-        if (source.col - 1 >= 0 && visited[source.row, source.col - 1] == false) {
-            Console.Write("Totoshka ({0},{1}),", source.row, source.col - 1);
-            adjacency++;
-        }
-
-        //right
-        if (source.col + 1 < M && visited[source.row, source.col + 1] == false) {
-            Console.Write("Totoshka ({0},{1}),", source.row, source.col + 1);
-            adjacency++;
-        }
-
-        // upright
-        if (source.row - 1 >= 0 && source.col + 1 < M && visited[source.row - 1, source.col + 1] == false) {
-            Console.Write("Totoshka ({0},{1}),", source.row - 1, source.col + 1);
-            adjacency++;
-        }
-
-        //move downright
-        if (source.row + 1 < N && source.col + 1 < M && visited[source.row + 1, source.col + 1] == false) {
-            Console.Write("Totoshka ({0},{1}),", source.row + 1, source.col + 1);
-            adjacency++;
-        }
-
-        //move downleft
-
-        if (source.row + 1 < N && source.col - 1 >= 0 && visited[source.row + 1, source.col - 1] == false) {
-            Console.Write("Totoshka ({0},{1}),", source.row + 1, source.col - 1);
-            adjacency++;
-        }
-
-        //move upleft
-        if (source.row - 1 >= 0 && source.col - 1 >= 0 && visited[source.row - 1, source.col - 1] == false) {
-            Console.Write("Totoshka ({0},{1}),", source.row - 1, source.col - 1);
-            adjacency++;
-        }
-        Console.WriteLine();
-        if (adjacency == 0) Console.WriteLine("No room for Tatoshka");
 
         // applying BFS on matrix cells starting from source
         Queue<QItem> q = new Queue<QItem>();
         q.Enqueue(source);
         visited[source.row, source.col] = true;
+
         QItem dest = null;
         QItem p = null;
+
         while (q.Count > 0) {
             p = q.Peek();
             q.Dequeue();
+
             // Destination found;
             if (grid[p.row, p.col] == 'd') {
                 dest = p;
                 break;
             }
 
-            // moving up
-            if (p.row - 1 >= 0 && visited[p.row - 1, p.col] == false) {
-                q.Enqueue(new QItem(p.row - 1, p.col, p.dist + 1, p));
-                visited[p.row - 1, p.col] = true;
+            for (int i = 0; i < 8; i++) {
+                int adjx = p.row + dRow[i];
+                int adjy = p.col + dCol[i];
+
+                if (isValid(visited, adjx, adjy, N, M)) {
+                    q.Enqueue(new QItem(adjx, adjy, p.dist + 1, p));
+                    visited[adjx, adjy] = true;
+                }
             }
 
-            // moving down
-            if (p.row + 1 < N && visited[p.row + 1, p.col] == false) {
-                q.Enqueue(new QItem(p.row + 1, p.col, p.dist + 1, p));
-                visited[p.row + 1, p.col] = true;
-            }
-
-            // moving left
-            if (p.col - 1 >= 0 && visited[p.row, p.col - 1] == false) {
-                q.Enqueue(new QItem(p.row, p.col - 1, p.dist + 1, p));
-                visited[p.row, p.col - 1] = true;
-            }
-
-            // moving right
-            if (p.col + 1 < M && visited[p.row, p.col + 1] == false) {
-                q.Enqueue(new QItem(p.row, p.col + 1, p.dist + 1, p));
-                visited[p.row, p.col + 1] = true;
-            }
-
-            //move upright
-            if (p.row - 1 >= 0 && p.col + 1 < M  && visited[p.row - 1, p.col + 1] == false) {
-                q.Enqueue(new QItem(p.row - 1, p.col + 1, p.dist + 1, p));
-                visited[p.row - 1, p.col + 1] = true;
-            }
-
-            //move downright
-            if (p.row + 1 < N && p.col + 1 < M && visited[p.row + 1, p.col + 1] == false) {
-                q.Enqueue(new QItem(p.row + 1, p.col + 1, p.dist + 1, p));
-                visited[p.row + 1, p.col + 1] = true;
-            }
-
-            //move downleft
-            if (p.row + 1 < N && p.col - 1 >= 0 && visited[p.row + 1, p.col - 1] == false) {
-                q.Enqueue(new QItem(p.row + 1, p.col - 1, p.dist + 1, p));
-                visited[p.row + 1, p.col - 1] = true;
-            }
-
-            //move upleft
-            if (p.row - 1 >= 0 && p.col - 1 >= 0 && visited[p.row - 1, p.col - 1] == false) {
-                q.Enqueue(new QItem(p.row - 1, p.col - 1, p.dist + 1, p));
-                visited[p.row - 1, p.col - 1] = true;
-            }
-            
         }
-        
+
         if (dest == null) {
             Console.WriteLine("there is no path.");
             return -1;
@@ -189,6 +107,18 @@ public static class GFG {
         // After everything else is printed
         Console.WriteLine("({0},{1}),", dest.row, dest.col);
     }
+
+    public static bool isValid(bool[,] vis, int row, int col, int gridRow, int gridCol) {
+        // If cell lies out of bounds
+        if (row < 0 || col < 0 || row >= gridRow || col >= gridCol)
+            return false;
+
+        // If cell is already visited
+        if (vis[row, col])
+            return false;
+
+        // Otherwise
+        return true;
+    }
 }
 
-// This code is contributed by Aarti_Rathi
